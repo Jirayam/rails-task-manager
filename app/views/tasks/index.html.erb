@@ -1,0 +1,22 @@
+<div class="container"></div>
+<h1>My tasks</h1>
+<ul>
+  <% @tasks.each do |task| %>
+  <%= link_to task_path( task['id'] ) do %>
+    <li class="text-decoration-none list-group-item">
+     <% if task.completed == true %>
+        <img src="https://img.icons8.com/metro/26/000000/checked-checkbox.png">
+      <% else %>
+        <img src="https://img.icons8.com/metro/26/000000/unchecked-checkbox.png">
+      <% end %> |
+     <%= task.title %> |
+     <%= link_to '-!- delete task', task_path(task),
+      method: :delete,
+      data: { confirm: "Are you sure?" } %>
+
+    </li>
+    <% end %>
+  <% end %>
+</ul>
+<button><%= link_to '+ create a new task', tasks_new_path %></button>
+
