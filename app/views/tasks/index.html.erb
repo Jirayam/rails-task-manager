@@ -1,22 +1,26 @@
-<div class="container"></div>
-<h1>My tasks</h1>
-<ul>
-  <% @tasks.each do |task| %>
-  <%= link_to task_path( task['id'] ) do %>
+<div class="container">
+  <h1 class="text-center">My tasks</h1>
+  <ul>
+    <% @tasks.each do |task| %>
     <li class="text-decoration-none list-group-item">
-     <% if task.completed == true %>
-        <img src="https://img.icons8.com/metro/26/000000/checked-checkbox.png">
-      <% else %>
-        <img src="https://img.icons8.com/metro/26/000000/unchecked-checkbox.png">
-      <% end %> |
-     <%= task.title %> |
-     <%= link_to '-!- delete task', task_path(task),
-      method: :delete,
-      data: { confirm: "Are you sure?" } %>
-
+       <% if task.completed == true %>
+          <img src="https://img.icons8.com/metro/26/000000/checked-checkbox.png">
+        <% else %>
+          <img src="https://img.icons8.com/metro/26/000000/unchecked-checkbox.png">
+        <% end %> |
+       <%= link_to task_path( task['id'] ) do %>
+       <%= task.title %>
+       <% end %>  |
+       <%= link_to task_path(task),
+        method: :delete,
+        data: { confirm: "Are you sure to delete this task?" } do %>
+        <img src="https://img.icons8.com/windows/50/000000/delete-forever.png" width="20">
+        <% end %>
     </li>
     <% end %>
-  <% end %>
-</ul>
-<button><%= link_to '+ create a new task', tasks_new_path %></button>
+  </ul>
+  <div class="d-flex justify-content-center">
+  <%= link_to '+ create a new task', tasks_new_path, :class=>"btn btn-primary" %>
+  </div>
+</div>
 
